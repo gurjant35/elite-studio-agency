@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Elite Studio Agency - Scarborough, Toronto</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg-1:#050507;--bg-2:#0d0d12;--bg-3:#111118;--bg-4:#16161f;--border:rgba(255,255,255,0.06);--accent:#6c63ff;--accent-2:#8b5cf6;--cyan:#00d4ff;--gold:#f59e0b;--white:#fff;--muted:#a0a0b8;--dim:#4a4a6a;--grad:linear-gradient(135deg,#6c63ff,#8b5cf6);--grad-cool:linear-gradient(135deg,#6c63ff,#00d4ff);--ease:cubic-bezier(0.23,1,0.32,1);--bounce:cubic-bezier(0.68,-0.55,0.265,1.55)}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg-1);color:#fff;overflow-x:hidden;cursor:none}
+h1,h2,h3,.logo-text{font-family:Syne,sans-serif}
+.cursor-dot{position:fixed;width:8px;height:8px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:opacity .3s}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(108,99,255,0.6);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s,border-color .3s}
+.cursor-ring.hover{width:56px;height:56px;background:rgba(108,99,255,0.08);border-color:#6c63ff}
+@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}body{cursor:auto}}
+[data-reveal]{opacity:0;transform:translateY(40px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+[data-reveal=left]{transform:translateX(-40px)}
+[data-reveal=right]{transform:translateX(40px)}
+[data-reveal=scale]{transform:scale(0.9)}
+[data-reveal].visible{opacity:1;transform:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,backdrop-filter .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(5,5,7,0.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-color:var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:0.05em}
+.logo-text span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:0.04em;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s var(--ease)}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.nav-cta{padding:10px 24px;border-radius:50px;border:1px solid rgba(108,99,255,0.5);color:#fff;text-decoration:none;font-size:13px;font-weight:500;transition:all .3s var(--ease);background:transparent}
+.nav-cta:hover{background:var(--grad);border-color:transparent;box-shadow:0 0 24px rgba(108,99,255,0.4)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;transition:all .3s var(--ease);border-radius:2px}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:rgba(5,5,7,0.98);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{color:#fff;text-decoration:none;font-family:Syne,sans-serif;font-size:2rem;font-weight:700;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s,color .2s}
+.mobile-menu.open a{opacity:1;transform:none}
+.mobile-menu.open a:nth-child(1){transition-delay:.05s}
+.mobile-menu.open a:nth-child(2){transition-delay:.1s}
+.mobile-menu.open a:nth-child(3){transition-delay:.15s}
+.mobile-menu.open a:nth-child(4){transition-delay:.2s}
+.mobile-menu.open a:nth-child(5){transition-delay:.25s}
+.mobile-menu.open a:nth-child(6){transition-delay:.3s}
+.mobile-menu a:hover{color:var(--accent)}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--bg-1)}
+.hero-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:32px 32px}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;animation:blobDrift 10s ease-in-out infinite alternate}
+.b1{width:600px;height:600px;background:var(--accent);top:-200px;left:-100px;animation-duration:10s}
+.b2{width:500px;height:500px;background:var(--accent-2);bottom:-100px;right:-150px;animation-duration:13s;animation-delay:-4s}
+.b3{width:400px;height:400px;background:var(--cyan);top:30%;left:40%;animation-duration:8s;animation-delay:-2s}
+@keyframes blobDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(60px,40px) scale(1.1)}}
+#particles{position:absolute;inset:0;z-index:1}
+.hero-inner{position:relative;z-index:3;max-width:1400px;margin:0 auto;padding:100px 40px 0;width:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:80px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.3);border-radius:50px;font-size:13px;color:var(--muted);margin-bottom:32px;backdrop-filter:blur(10px)}
+.hero-h1{font-size:clamp(52px,7vw,92px);font-weight:800;line-height:.95;letter-spacing:-4px;margin-bottom:28px}
+.line-1{display:block;color:#fff}
+.line-2{display:block;-webkit-text-stroke:2px var(--accent);color:transparent}
+.line-3{display:block;background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200%;animation:gradShift 4s ease infinite}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.75;max-width:480px;margin-bottom:40px}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:15px 34px;background:var(--grad);border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s var(--ease);box-shadow:0 4px 24px rgba(108,99,255,0.3);position:relative;overflow:hidden}
+.btn-p:hover{transform:scale(1.04);box-shadow:0 8px 40px rgba(108,99,255,0.5)}
+.btn-p .arr{transition:transform .3s var(--ease)}
+.btn-p:hover .arr{transform:translateX(4px)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:15px 34px;border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .3s var(--ease);background:transparent}
+.btn-g:hover{border-color:rgba(108,99,255,0.4);background:rgba(108,99,255,0.06)}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.browser-card{position:relative;width:100%;max-width:500px;border-radius:16px;padding:20px;background:linear-gradient(var(--bg-3),var(--bg-3)) padding-box,linear-gradient(135deg,var(--accent),var(--cyan)) border-box;border:1px solid transparent;transform:perspective(1000px) rotateX(8deg) rotateY(-5deg);box-shadow:0 40px 80px rgba(0,0,0,.6)}
+.b-bar{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.b-dots{display:flex;gap:6px}
+.b-dots span{width:10px;height:10px;border-radius:50%}
+.b-dots span:nth-child(1){background:#ff5f57}
+.b-dots span:nth-child(2){background:#febc2e}
+.b-dots span:nth-child(3){background:#28c840}
+.b-url{flex:1;height:28px;background:rgba(255,255,255,0.06);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:11px;color:var(--dim)}
+.b-content{background:rgba(108,99,255,0.06);border-radius:10px;padding:24px;min-height:200px;display:flex;flex-direction:column;gap:12px}
+.b-bar-line{height:10px;background:rgba(108,99,255,0.2);border-radius:4px}
+.b-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.b-block{height:55px;background:rgba(108,99,255,0.12);border-radius:8px}
+.fbadge{position:absolute;padding:8px 14px;background:rgba(22,22,31,.95);border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:600;backdrop-filter:blur(10px);white-space:nowrap;animation:floatBob 3s ease-in-out infinite}
+.fb1{top:-20px;right:-20px;color:#28c840;animation-delay:0s}
+.fb2{bottom:40px;left:-30px;color:var(--cyan);animation-delay:-1s}
+.fb3{bottom:-20px;right:20px;color:var(--gold);animation-delay:-2s}
+@keyframes floatBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:.5;transition:opacity .3s}
+.scroll-ind span{font-size:11px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+.chev{width:22px;height:22px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);animation:chevPulse 1.5s ease-in-out infinite}
+@keyframes chevPulse{0%,100%{opacity:.5;transform:rotate(45deg) translateY(-4px)}50%{opacity:1;transform:rotate(45deg) translateY(0)}}
+section{padding:120px 0}
+.container{max-width:1400px;margin:0 auto;padding:0 40px}
+.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--accent);margin-bottom:16px}
+.sec-title{font-size:clamp(34px,4.5vw,60px);font-weight:700;line-height:1.1;letter-spacing:-2px;margin-bottom:20px}
+.grad-text{background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#services{background:var(--bg-2)}
+.srv-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:60px}
+.srv-card{position:relative;background:rgba(255,255,255,.03);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;padding:40px;overflow:hidden;transition:all .4s var(--ease)}
+.srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .4s}
+.srv-card:hover{border-color:rgba(108,99,255,.4);transform:translateY(-8px);box-shadow:0 20px 60px rgba(108,99,255,.12)}
+.srv-card:hover::before{opacity:1}
+.srv-icon{width:54px;height:54px;background:rgba(108,99,255,.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:transform .3s var(--ease)}
+.srv-card:hover .srv-icon{transform:scale(1.1)}
+.srv-tag{display:inline-block;padding:4px 12px;background:rgba(108,99,255,.15);border:1px solid rgba(108,99,255,.25);border-radius:50px;font-size:11px;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.srv-card h3{font-size:22px;font-weight:700;margin-bottom:10px;letter-spacing:-.5px}
+.srv-card p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:18px}
+.srv-feats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px}
+.srv-feats li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+.srv-feats li::before{content:'check';color:var(--accent);font-weight:700;flex-shrink:0}
+.srv-link{color:var(--accent);text-decoration:none;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.srv-link:hover{gap:10px}
+.prod-teaser{margin-top:24px;padding:30px 40px;background:transparent;border-radius:20px;border:1px solid transparent;background-image:linear-gradient(var(--bg-2),var(--bg-2)),var(--grad-cool);background-origin:border-box;background-clip:padding-box,border-box;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:all .3s var(--ease)}
+.prod-teaser:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(108,99,255,.15)}
+.prod-teaser span:first-child{font-size:17px;font-weight:600;color:#fff}
+.prod-teaser .ta{font-size:20px;color:var(--accent);transition:transform .3s}
+.prod-teaser:hover .ta{transform:translateX(8px)}
+#about{background:var(--bg-1);position:relative;overflow:hidden}
+.about-wm{position:absolute;font-family:Syne,sans-serif;font-size:260px;font-weight:800;color:rgba(255,255,255,.02);right:-40px;top:50%;transform:translateY(-50%);pointer-events:none;letter-spacing:-10px;user-select:none}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.stat-num{font-family:Syne,sans-serif;font-size:60px;font-weight:800;line-height:1;background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.stat-lbl{font-size:13px;color:var(--muted);letter-spacing:.05em}
+.callout{background:rgba(255,255,255,.03);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:22px;margin:24px 0}
+.callout p{font-size:15px;color:var(--muted);line-height:1.75;font-style:italic}
+#portfolio{background:var(--bg-2)}
+.ftabs{display:flex;gap:8px;flex-wrap:wrap;margin:40px 0}
+.ftab{padding:8px 20px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .25s;font-family:Inter,sans-serif}
+.ftab.active,.ftab:hover{background:var(--grad);border-color:transparent;color:#fff}
+.bento{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.bento-row2{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.pc{position:relative;border-radius:16px;overflow:hidden;background:var(--bg-3);border:1px solid var(--border);aspect-ratio:16/9;cursor:pointer;transition:all .35s var(--ease)}
+.pc-inner{position:absolute;inset:0}
+.pc-grad{position:absolute;inset:0;transition:transform .4s var(--ease)}
+.pc:hover .pc-grad{transform:scale(1.05)}
+.pc-num{position:absolute;top:16px;left:20px;font-family:Syne,sans-serif;font-size:44px;font-weight:800;color:rgba(255,255,255,.06);line-height:1}
+.pc-ov{position:absolute;inset:0;background:rgba(5,5,7,.85);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:22px}
+.pc:hover .pc-ov{opacity:1}
+.pc-title{font-family:Syne,sans-serif;font-size:17px;font-weight:700;transform:translateY(16px);transition:transform .35s;margin-bottom:6px}
+.pc:hover .pc-title{transform:none}
+.pc-tag{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.15em;transform:translateY(16px);transition:transform .35s .05s}
+.pc:hover .pc-tag{transform:none}
+.pc-btn{margin-top:10px;padding:7px 14px;background:var(--grad);border:none;border-radius:6px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;transform:translateY(16px);opacity:0;transition:all .35s .1s;font-family:Inter,sans-serif}
+.pc:hover .pc-btn{transform:none;opacity:1}
+.pc:hover{border-color:rgba(108,99,255,.4);box-shadow:0 0 30px rgba(108,99,255,.15)}
+#testimonials{background:var(--bg-1);overflow:hidden}
+.mq-wrap{position:relative;margin-top:60px}
+.mq-track{display:flex;gap:24px;animation:marquee 30s linear infinite}
+.mq-track:hover{animation-play-state:paused}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tc{flex-shrink:0;width:380px;background:var(--bg-4);border:1px solid var(--border);border-radius:20px;padding:32px;transition:all .3s var(--ease)}
+.tc:hover{border-color:rgba(108,99,255,.4);transform:translateY(-4px)}
+.tc-q{font-size:64px;line-height:.6;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.4;margin-bottom:14px;font-family:Georgia,serif}
+.tc-txt{font-size:15px;color:#e0e0e8;line-height:1.8;margin-bottom:20px}
+.tc-stars{color:var(--gold);font-size:13px;margin-bottom:10px;letter-spacing:2px}
+.tc-auth{display:flex;align-items:center;gap:12px}
+.tc-av{width:40px;height:40px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0}
+.tc-name{font-size:14px;font-weight:600}
+.tc-role{font-size:12px;color:var(--accent);margin-top:2px}
+.tc-loc{font-size:11px;color:var(--dim);margin-top:1px}
+#contact{background:var(--bg-1);position:relative;overflow:hidden;text-align:center}
+#contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(108,99,255,.2),transparent 60%);pointer-events:none}
+.contact-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.contact-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.info-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ic{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;transition:all .3s var(--ease)}
+.ic:hover{border-color:rgba(108,99,255,.3);transform:translateY(-4px)}
+.ic-ico{font-size:18px;margin-bottom:6px}
+.ic-lbl{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:3px}
+.ic-val{font-size:13px;color:var(--muted)}
+footer{background:var(--bg-2);border-top:1px solid var(--border);padding:72px 0 36px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:48px;margin-bottom:56px}
+.fb-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin:14px 0 20px}
+.si{display:flex;gap:12px}
+.sico{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;color:var(--muted);transition:all .2s}
+.sico:hover{border-color:var(--accent);color:var(--accent);background:rgba(108,99,255,.1)}
+.fc h4{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:18px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.fc ul a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
+.fc ul a:hover{color:#fff}
+.fc-cta{display:inline-block;margin-top:14px;padding:9px 18px;background:var(--grad);border-radius:6px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;transition:all .3s}
+.fc-cta:hover{box-shadow:0 4px 16px rgba(108,99,255,.4)}
+.fb-bot{border-top:1px solid var(--border);padding-top:28px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--dim);flex-wrap:wrap;gap:14px}
+.fb-bot a{color:var(--dim);text-decoration:none;transition:color .2s}
+.fb-bot a:hover{color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(max-width:1024px){.hero-inner{grid-template-columns:1fr;gap:40px;text-align:center}.hero-visual{display:none}.hero-badge,.hero-ctas{justify-content:center;display:flex}.hero-sub{margin:0 auto 36px}.srv-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}.bento{grid-template-columns:1fr 1fr}.bento-row2{grid-template-columns:1fr 1fr}.info-cards{grid-template-columns:1fr}}
+@media(max-width:768px){nav{padding:0 20px}.nav-links,.nav-cta{display:none}.hamburger{display:flex}.hero-inner{padding:90px 20px 0}.container{padding:0 20px}section{padding:80px 0}.hero-h1{font-size:clamp(38px,10vw,56px);letter-spacing:-2px}.bento{grid-template-columns:1fr}.bento-row2{grid-template-columns:1fr}.fg{grid-template-columns:1fr}.contact-ctas{flex-direction:column;align-items:center}.stats-grid{grid-template-columns:1fr 1fr}.fb-bot{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="mobile-menu" id="mm">
+  <a href="#hero">Home</a><a href="#services">Services</a><a href="#portfolio">Work</a>
+  <a href="#about">About</a><a href="products.html" data-nav>Products</a><a href="#contact">Contact</a>
+</div>
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#6c63ff" stroke-width="2" fill="rgba(108,99,255,0.1)"/><polygon points="14,7 21,11 21,17 14,21 7,17 7,11" fill="#6c63ff" opacity="0.4"/></svg>
+    <span class="logo-text">ELITE STUDIO <span>AGENCY</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li><li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Work</a></li><li><a href="#about">About</a></li>
+    <li><a href="products.html" data-nav>Products</a></li><li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's Talk</a>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <canvas id="particles"></canvas>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge" data-reveal>&#128640; Digital Agency &middot; Scarborough, Toronto</div>
+      <h1 class="hero-h1" data-reveal>
+        <span class="line-1">We Build</span>
+        <span class="line-2">Digital</span>
+        <span class="line-3" data-scramble="Experiences">Experiences</span>
+      </h1>
+      <p class="hero-sub" data-reveal>Elite Studio Agency crafts high-performance websites and digital strategies for businesses in Scarborough, Toronto and beyond.</p>
+      <div class="hero-ctas" data-reveal>
+        <a href="#contact" class="btn-p mag">Start Your Project <span class="arr">&#8594;</span></a>
+        <a href="#portfolio" class="btn-g">View Our Work &#8595;</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="browser-card" id="bc">
+        <div class="b-bar"><div class="b-dots"><span></span><span></span><span></span></div><div class="b-url">elitestudioagency.ca</div></div>
+        <div class="b-content">
+          <div class="b-bar-line" style="width:80%"></div><div class="b-bar-line" style="width:60%"></div>
+          <div class="b-grid"><div class="b-block"></div><div class="b-block"></div><div class="b-block"></div><div class="b-block"></div></div>
+          <div class="b-bar-line" style="width:40%"></div>
+        </div>
+        <div class="fbadge fb1">&#10003; 99 Lighthouse</div>
+        <div class="fbadge fb2">&#8593; 3&times; Traffic</div>
+        <div class="fbadge fb3">&#9733; 5.0 Rating</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind" id="si"><div class="chev"></div><span>Scroll to explore</span></div>
+</section>
+<section id="services">
+  <div class="container">
+    <p class="eyebrow" data-reveal>What We Do</p>
+    <h2 class="sec-title" data-reveal>Services Built for <span class="grad-text">Growth</span></h2>
+    <div class="srv-grid">
+      <div class="srv-card" data-reveal style="transition-delay:.1s">
+        <div class="srv-icon"><svg width="26" height="26" fill="none" stroke="#6c63ff" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8M12 17v4M7 8l3 3-3 3M13 14h4"/></svg></div>
+        <span class="srv-tag">Core Service</span><h3>Website Design &amp; Development</h3>
+        <p>Fast, SEO-optimised, conversion-focused websites built to grow your Scarborough business.</p>
+        <ul class="srv-feats"><li>Custom Design</li><li>Mobile-First Build</li><li>SEO-Optimised</li><li>Ongoing Support</li></ul>
+        <a href="#contact" class="srv-link">Learn More &#8594;</a>
+      </div>
+      <div class="srv-card" data-reveal style="transition-delay:.2s">
+        <div class="srv-icon"><svg width="26" height="26" fill="none" stroke="#6c63ff" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+        <span class="srv-tag">Local SEO</span><h3>Google Business Profile Optimization</h3>
+        <p>Dominate local search and get found by customers across Scarborough and Toronto.</p>
+        <ul class="srv-feats"><li>Profile Setup &amp; Verification</li><li>Review Management</li><li>Photo &amp; Post Optimization</li><li>Local Ranking Strategy</li></ul>
+        <a href="#contact" class="srv-link">Learn More &#8594;</a>
+      </div>
+    </div>
+    <a href="products.html" class="prod-teaser" data-nav data-reveal>
+      <span>&#128717; Explore Our Digital Products &mdash; Templates, SEO Guides &amp; More</span>
+      <span class="ta">&#8594;</span>
+    </a>
+  </div>
+</section>
+<section id="about">
+  <div class="about-wm">ELITE</div>
+  <div class="container">
+    <div class="about-grid">
+      <div data-reveal="left">
+        <div class="stats-grid">
+          <div><div class="stat-num" data-count="50" data-suffix="+">0+</div><div class="stat-lbl">Projects Completed</div></div>
+          <div><div class="stat-num" data-count="3" data-suffix="x">0x</div><div class="stat-lbl">Avg Traffic Increase</div></div>
+          <div><div class="stat-num" data-count="98" data-suffix="%">0%</div><div class="stat-lbl">Client Satisfaction</div></div>
+          <div><div class="stat-num" data-count="5" data-suffix="*">0*</div><div class="stat-lbl">Google Rating</div></div>
+        </div>
+      </div>
+      <div data-reveal="right">
+        <p class="eyebrow">Why Elite Studio</p>
+        <h2 class="sec-title">Your Local Partner for Digital <span class="grad-text">Excellence</span></h2>
+        <p style="color:var(--muted);line-height:1.8;font-size:16px">We're a Scarborough-based digital agency passionate about helping local businesses dominate online. We combine strategic thinking with elite execution to deliver results that matter.</p>
+        <div class="callout"><p>"We don't just build websites &mdash; we build digital assets that work for your business 24/7."</p></div>
+        <a href="#contact" class="srv-link" style="font-size:15px">Our Story &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="portfolio">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Our Work</p>
+    <h2 class="sec-title" data-reveal>Projects That <span class="grad-text">Speak</span> For Themselves</h2>
+    <div class="ftabs" data-reveal>
+      <button class="ftab active" data-f="all">All</button>
+      <button class="ftab" data-f="web">Web Design</button>
+      <button class="ftab" data-f="seo">Local SEO</button>
+      <button class="ftab" data-f="brand">Branding</button>
+    </div>
+    <div class="bento">
+      <div class="pc" data-reveal data-cat="web"><div class="pc-inner"><div class="pc-grad" style="background:linear-gradient(135deg,#6c63ff,#1e40af);width:100%;height:100%"></div><div class="pc-num">01</div><div class="pc-ov"><div class="pc-title">Trades Business Website</div><div class="pc-tag">Web Design</div><button class="pc-btn">View Project &#8594;</button></div></div></div>
+      <div class="pc" data-reveal style="transition-delay:.1s" data-cat="seo"><div class="pc-inner"><div class="pc-grad" style="background:linear-gradient(135deg,#059669,#0d9488);width:100%;height:100%"></div><div class="pc-num">02</div><div class="pc-ov"><div class="pc-title">Google Profile Optimization</div><div class="pc-tag">Local SEO</div><button class="pc-btn">View Project &#8594;</button></div></div></div>
+      <div class="bento-row2">
+        <div class="pc" data-reveal data-cat="brand"><div class="pc-inner"><div class="pc-grad" style="background:linear-gradient(135deg,#f59e0b,#ef4444);width:100%;height:100%"></div><div class="pc-num">03</div><div class="pc-ov"><div class="pc-title">Restaurant Branding</div><div class="pc-tag">Branding</div><button class="pc-btn">View &#8594;</button></div></div></div>
+        <div class="pc" data-reveal style="transition-delay:.1s" data-cat="web"><div class="pc-inner"><div class="pc-grad" style="background:linear-gradient(135deg,#0ea5e9,#6c63ff);width:100%;height:100%"></div><div class="pc-num">04</div><div class="pc-ov"><div class="pc-title">E-commerce Store</div><div class="pc-tag">Web Design</div><button class="pc-btn">View &#8594;</button></div></div></div>
+        <div class="pc" data-reveal style="transition-delay:.2s" data-cat="seo"><div class="pc-inner"><div class="pc-grad" style="background:linear-gradient(135deg,#8b5cf6,#ec4899);width:100%;height:100%"></div><div class="pc-num">05</div><div class="pc-ov"><div class="pc-title">Local SEO Campaign</div><div class="pc-tag">Local SEO</div><button class="pc-btn">View &#8594;</button></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="testimonials">
+  <div class="container"><p class="eyebrow" data-reveal>Client Stories</p><h2 class="sec-title" data-reveal>What Our <span class="grad-text">Clients</span> Say</h2><p style="color:var(--gold);font-size:18px;margin-top:8px;letter-spacing:3px" data-reveal>&#9733;&#9733;&#9733;&#9733;&#9733; <span style="color:var(--muted);font-size:13px;letter-spacing:0">5.0 Average Rating</span></p></div>
+  <div class="mq-wrap"><div class="mq-track">
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">Elite Studio transformed our online presence. We went from zero Google visibility to top result in Scarborough. Incredible work.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">MR</div><div><div class="tc-name">Mike R.</div><div class="tc-role">Owner, Regal Roofing</div><div class="tc-loc">Scarborough, Toronto</div></div></div></div>
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">The website loads instantly and looks premium. Our customers constantly compliment it. Revenue is up 40% since launch.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">SP</div><div><div class="tc-name">Sara P.</div><div class="tc-role">Founder, Spark Electrical</div><div class="tc-loc">North York, Toronto</div></div></div></div>
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">Professional, fast, and genuinely invested in our success. Delivered beyond expectations. Highly recommend.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">DJ</div><div><div class="tc-name">David J.</div><div class="tc-role">Director, Clean Pro Plumbing</div><div class="tc-loc">Scarborough, Toronto</div></div></div></div>
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">Our Google Business Profile now gets 300+ views per week. The local SEO strategy they built is genuinely working.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">AL</div><div><div class="tc-name">Aisha L.</div><div class="tc-role">Owner, Lux Interiors</div><div class="tc-loc">Markham, Ontario</div></div></div></div>
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">Elite Studio transformed our online presence. We went from zero Google visibility to top result in Scarborough. Incredible work.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">MR</div><div><div class="tc-name">Mike R.</div><div class="tc-role">Owner, Regal Roofing</div><div class="tc-loc">Scarborough, Toronto</div></div></div></div>
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">The website loads instantly and looks premium. Our customers constantly compliment it. Revenue is up 40% since launch.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">SP</div><div><div class="tc-name">Sara P.</div><div class="tc-role">Founder, Spark Electrical</div><div class="tc-loc">North York, Toronto</div></div></div></div>
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">Professional, fast, and genuinely invested in our success. Delivered beyond expectations. Highly recommend.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">DJ</div><div><div class="tc-name">David J.</div><div class="tc-role">Director, Clean Pro Plumbing</div><div class="tc-loc">Scarborough, Toronto</div></div></div></div>
+    <div class="tc"><div class="tc-q">&quot;</div><p class="tc-txt">Our Google Business Profile now gets 300+ views per week. The local SEO strategy they built is genuinely working.</p><div class="tc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="tc-auth"><div class="tc-av">AL</div><div><div class="tc-name">Aisha L.</div><div class="tc-role">Owner, Lux Interiors</div><div class="tc-loc">Markham, Ontario</div></div></div></div>
+  </div></div>
+</section>
+<section id="contact">
+  <div class="container"><div class="contact-inner">
+    <p class="eyebrow" data-reveal>Get In Touch</p>
+    <h2 class="sec-title" data-reveal>Ready to Build Something <span class="grad-text">Extraordinary?</span></h2>
+    <p style="color:var(--muted);font-size:17px;margin-bottom:36px" data-reveal>Let's discuss your project. We work with businesses across Scarborough, Toronto and beyond.</p>
+    <div class="contact-ctas" data-reveal>
+      <a href="mailto:hello@elitestudioagency.ca" class="btn-p mag">Start Your Project <span class="arr">&#8594;</span></a>
+      <a href="mailto:hello@elitestudioagency.ca" class="btn-g">&#9993; hello@elitestudioagency.ca</a>
+    </div>
+    <div class="info-cards">
+      <div class="ic" data-reveal style="transition-delay:.1s"><div class="ic-ico">&#128205;</div><div class="ic-lbl">Location</div><div class="ic-val">Scarborough, Toronto</div></div>
+      <div class="ic" data-reveal style="transition-delay:.2s"><div class="ic-ico">&#128231;</div><div class="ic-lbl">Email</div><div class="ic-val">hello@elitestudioagency.ca</div></div>
+      <div class="ic" data-reveal style="transition-delay:.3s"><div class="ic-ico">&#128336;</div><div class="ic-lbl">Response Time</div><div class="ic-val">Within 24 Hours</div></div>
+    </div>
+  </div></div>
+</section>
+<footer>
+  <div class="container">
+    <div class="fg">
+      <div class="fb-brand">
+        <a href="#hero" class="nav-logo" style="display:inline-flex;margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 28 28" fill="none"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#6c63ff" stroke-width="2" fill="rgba(108,99,255,0.1)"/></svg><span class="logo-text" style="font-size:.95rem">ELITE STUDIO <span>AGENCY</span></span></a>
+        <p>Building digital excellence for Scarborough businesses and beyond.</p>
+        <div class="si"><a href="#" class="sico">X</a><a href="#" class="sico">in</a><a href="#" class="sico">ig</a><a href="#" class="sico">fb</a></div>
+      </div>
+      <div class="fc"><h4>Services</h4><ul><li><a href="#services">Website Design</a></li><li><a href="#services">Google Profile</a></li><li><a href="products.html" data-nav>Digital Products</a></li><li><a href="#contact">Custom Projects</a></li></ul></div>
+      <div class="fc"><h4>Company</h4><ul><li><a href="#about">About Us</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div class="fc"><h4>Contact</h4><ul><li><a href="#">&#128205; Scarborough, Toronto</a></li><li><a href="mailto:hello@elitestudioagency.ca">&#9993; hello@elitestudioagency.ca</a></li></ul><a href="#contact" class="fc-cta">Get a Free Quote</a></div>
+    </div>
+    <div class="fb-bot"><span>&copy; 2026 Elite Studio Agency. All rights reserved.</span><div style="display:flex;gap:22px"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+  </div>
+</footer>
+<script>
+const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
+let rx=0,ry=0;
+function raf(fn){requestAnimationFrame(fn)}
+document.addEventListener('mousemove',e=>{
+  dot.style.transform=`translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`;
+  rx+=(e.clientX-rx)*.12;ry+=(e.clientY-ry)*.12;
+  ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`});
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'))});
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>50);document.getElementById('si').style.opacity=scrollY>100?'0':'1'});
+const ham=document.getElementById('ham'),mm=document.getElementById('mm');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mm.classList.toggle('open')});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mm.classList.remove('open')}));
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('[data-reveal]').forEach(el=>ro.observe(el));
+const cv=document.getElementById('particles'),cx=cv.getContext('2d');
+let W,H,pts=[];
+function rsz(){W=cv.width=innerWidth;H=cv.height=innerHeight}rsz();addEventListener('resize',rsz);
+for(let i=0;i<80;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.2+.3});
+function dp(){
+  cx.clearRect(0,0,W,H);
+  pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle='rgba(108,99,255,.5)';cx.fill()});
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(108,99,255,${(1-d/120)*.2})`;cx.lineWidth=.5;cx.stroke()}}
+  requestAnimationFrame(dp)}dp();
+function ac(el,t,dur=1500){const s=performance.now();const u=n=>{const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,4);el.textContent=Math.round(e*t)+(el.dataset.suffix||'');if(p<1)raf(u)};raf(u)}
+const co=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){ac(e.target,+e.target.dataset.count);co.unobserve(e.target)}})},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+function scr(el,ft,dur=1200){const ch='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#';let f=0,tf=Math.round(dur/40);const iv=setInterval(()=>{el.textContent=ft.split('').map((c,i)=>i<Math.floor(f/tf*ft.length)?c:ch[Math.floor(Math.random()*ch.length)]).join('');f++;if(f>tf){el.textContent=ft;clearInterval(iv)}},40)}
+addEventListener('load',()=>{document.querySelectorAll('[data-scramble]').forEach(el=>scr(el,el.dataset.scramble))});
+document.querySelectorAll('.mag').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect(),x=(e.clientX-r.left-r.width/2)*.3,y=(e.clientY-r.top-r.height/2)*.3;b.style.transform=`translate(${x}px,${y}px)`});b.addEventListener('mouseleave',()=>b.style.transform='')});
+function nav2(url){const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:#050507;z-index:99999;transform:translateY(-100%);transition:transform .35s cubic-bezier(.23,1,.32,1)';document.body.appendChild(o);raf(()=>raf(()=>{o.style.transform='translateY(0)'}));setTimeout(()=>location.href=url,380)}
+document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();nav2(a.href)}));
+document.querySelectorAll('.ftab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.ftab').forEach(x=>x.classList.remove('active'));t.classList.add('active');const f=t.dataset.f;document.querySelectorAll('.pc').forEach(c=>{const s=f==='all'||c.dataset.cat===f;c.style.opacity=s?'1':'.2';c.style.transform=s?'':'scale(.95)'})})});
+const bc=document.getElementById('bc');if(bc)document.addEventListener('mousemove',e=>{const r=bc.getBoundingClientRect(),x=((e.clientX-r.left)/r.width-.5)*8,y=((e.clientY-r.top)/r.height-.5)*-8;bc.style.transform=`perspective(1000px) rotateX(${y}deg) rotateY(${x}deg)`});
+document.querySelectorAll('.btn-p').forEach(b=>{b.addEventListener('click',e=>{const r=document.createElement('span');r.style.cssText=`position:absolute;width:4px;height:4px;background:rgba(255,255,255,.5);border-radius:50%;left:${e.offsetX}px;top:${e.offsetY}px;transform:scale(0);animation:rp .6s ease-out;pointer-events:none`;b.appendChild(r);setTimeout(()=>r.remove(),600)})});
+const rs=document.createElement('style');rs.textContent='@keyframes rp{to{transform:scale(80);opacity:0}}';document.head.appendChild(rs);
+</script>
+</body>
+</html>
