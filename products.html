@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Digital Products - Elite Studio Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg-1:#050507;--bg-2:#0d0d12;--bg-3:#111118;--bg-4:#16161f;--border:rgba(255,255,255,0.06);--accent:#6c63ff;--accent-2:#8b5cf6;--cyan:#00d4ff;--gold:#f59e0b;--white:#fff;--muted:#a0a0b8;--dim:#4a4a6a;--grad:linear-gradient(135deg,#6c63ff,#8b5cf6);--grad-cool:linear-gradient(135deg,#6c63ff,#00d4ff);--ease:cubic-bezier(0.23,1,0.32,1)}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg-1);color:#fff;overflow-x:hidden;cursor:none}
+h1,h2,h3,.logo-text{font-family:Syne,sans-serif}
+.cursor-dot{position:fixed;width:8px;height:8px;background:#fff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:opacity .3s}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1.5px solid rgba(108,99,255,0.6);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s,border-color .3s}
+.cursor-ring.hover{width:56px;height:56px;background:rgba(108,99,255,0.08);border-color:#6c63ff}
+@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none}body{cursor:auto}}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(5,5,7,0.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-text{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:0.05em}
+.logo-text span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:0.04em;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s var(--ease)}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-cta{padding:10px 24px;border-radius:50px;border:1px solid rgba(108,99,255,0.5);color:#fff;text-decoration:none;font-size:13px;font-weight:500;transition:all .3s var(--ease);background:transparent}
+.nav-cta:hover{background:var(--grad);border-color:transparent;box-shadow:0 0 24px rgba(108,99,255,0.4)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;transition:all .3s var(--ease);border-radius:2px}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{position:fixed;inset:0;background:rgba(5,5,7,0.98);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{color:#fff;text-decoration:none;font-family:Syne,sans-serif;font-size:2rem;font-weight:700;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s,color .2s}
+.mobile-menu.open a{opacity:1;transform:none}
+.mobile-menu.open a:nth-child(1){transition-delay:.05s}
+.mobile-menu.open a:nth-child(2){transition-delay:.1s}
+.mobile-menu.open a:nth-child(3){transition-delay:.15s}
+.mobile-menu.open a:nth-child(4){transition-delay:.2s}
+.mobile-menu.open a:nth-child(5){transition-delay:.25s}
+.mobile-menu.open a:nth-child(6){transition-delay:.3s}
+.mobile-menu a:hover{color:var(--accent)}
+[data-reveal]{opacity:0;transform:translateY(40px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+[data-reveal].visible{opacity:1;transform:none}
+.container{max-width:1400px;margin:0 auto;padding:0 40px}
+.eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.18em;color:var(--accent);margin-bottom:16px}
+.sec-title{font-size:clamp(34px,4.5vw,60px);font-weight:700;line-height:1.1;letter-spacing:-2px;margin-bottom:20px}
+.grad-text{background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn-p{display:inline-flex;align-items:center;gap:8px;padding:15px 34px;background:var(--grad);border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s var(--ease);box-shadow:0 4px 24px rgba(108,99,255,0.3);position:relative;overflow:hidden}
+.btn-p:hover{transform:scale(1.04);box-shadow:0 8px 40px rgba(108,99,255,0.5)}
+.btn-g{display:inline-flex;align-items:center;gap:8px;padding:15px 34px;border:1px solid rgba(255,255,255,0.15);border-radius:8px;color:#fff;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;transition:all .3s var(--ease);background:transparent}
+.btn-g:hover{border-color:rgba(108,99,255,0.4);background:rgba(108,99,255,0.06)}
+#products-hero{padding:160px 0 100px;background:var(--bg-1);position:relative;overflow:hidden;text-align:center}
+#products-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,.15),transparent 60%);pointer-events:none}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.1}
+.hb1{width:800px;height:400px;background:var(--accent);top:-100px;left:50%;transform:translateX(-50%)}
+.ph-inner{position:relative;z-index:1;max-width:800px;margin:0 auto}
+.ph-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.3);border-radius:50px;font-size:13px;color:var(--muted);margin-bottom:28px}
+.ph-title{font-size:clamp(48px,7vw,88px);font-weight:800;line-height:.95;letter-spacing:-4px;margin-bottom:20px}
+.ph-sub{font-size:18px;color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 40px}
+.ph-search{display:flex;align-items:center;gap:12px;max-width:480px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:14px 20px;transition:border-color .3s}
+.ph-search:focus-within{border-color:rgba(108,99,255,.5)}
+.ph-search input{flex:1;background:none;border:none;outline:none;color:#fff;font-size:15px;font-family:Inter,sans-serif}
+.ph-search input::placeholder{color:var(--dim)}
+.ph-search svg{color:var(--dim);flex-shrink:0}
+.products-section{padding:80px 0 120px;background:var(--bg-1)}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px}
+.filt-btn{padding:9px 22px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;transition:all .25s;font-family:Inter,sans-serif}
+.filt-btn.active,.filt-btn:hover{background:var(--grad);border-color:transparent;color:#fff}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.prod-card{background:var(--bg-4);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .4s var(--ease);position:relative}
+.prod-card:hover{border-color:rgba(108,99,255,.4);transform:translateY(-8px);box-shadow:0 24px 60px rgba(108,99,255,.12)}
+.prod-thumb{position:relative;aspect-ratio:16/9;overflow:hidden}
+.prod-thumb-bg{width:100%;height:100%;transition:transform .4s var(--ease)}
+.prod-card:hover .prod-thumb-bg{transform:scale(1.04)}
+.prod-badge-wrap{position:absolute;top:12px;left:12px;display:flex;gap:6px}
+.pbadge{padding:4px 10px;border-radius:50px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.pbadge-new{background:rgba(0,212,255,.15);color:var(--cyan);border:1px solid rgba(0,212,255,.3)}
+.pbadge-hot{background:rgba(245,158,11,.15);color:var(--gold);border:1px solid rgba(245,158,11,.3)}
+.pbadge-free{background:rgba(40,200,64,.15);color:#28c840;border:1px solid rgba(40,200,64,.3)}
+.prod-body{padding:24px}
+.prod-cat{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+.prod-name{font-family:Syne,sans-serif;font-size:19px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.prod-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.prod-meta{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.prod-stars{color:var(--gold);font-size:12px;letter-spacing:2px}
+.prod-reviews{font-size:12px;color:var(--dim)}
+.prod-footer{display:flex;align-items:center;justify-content:space-between}
+.prod-price{font-family:Syne,sans-serif;font-size:24px;font-weight:800;background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.prod-price-free{font-family:Syne,sans-serif;font-size:22px;font-weight:800;color:#28c840}
+.prod-btn{padding:9px 20px;background:var(--grad);border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s var(--ease);font-family:Inter,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.prod-btn:hover{box-shadow:0 4px 20px rgba(108,99,255,.4);transform:scale(1.04)}
+.prod-btn-out{padding:9px 20px;background:transparent;border:1px solid rgba(108,99,255,.4);border-radius:8px;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;transition:all .3s var(--ease);font-family:Inter,sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.prod-btn-out:hover{background:rgba(108,99,255,.1)}
+.featured-section{padding:80px 0;background:var(--bg-2)}
+.feat-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.feat-visual{border-radius:20px;overflow:hidden;border:1px solid var(--border);position:relative}
+.feat-visual-bg{aspect-ratio:4/3}
+.feat-label{position:absolute;top:16px;left:16px;padding:6px 14px;background:rgba(108,99,255,.9);border-radius:50px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.feat-steps{list-style:none;display:flex;flex-direction:column;gap:16px;margin:24px 0 32px}
+.feat-step{display:flex;align-items:flex-start;gap:14px}
+.fs-num{width:28px;height:28px;border-radius:50%;background:rgba(108,99,255,.15);border:1px solid rgba(108,99,255,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;margin-top:2px}
+.fs-text{font-size:15px;color:var(--muted);line-height:1.6}
+.fs-text strong{color:#fff}
+.feat-price{font-family:Syne,sans-serif;font-size:42px;font-weight:800;background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+.feat-sub-price{font-size:13px;color:var(--dim);margin-bottom:24px}
+.feat-ctas{display:flex;gap:12px;flex-wrap:wrap}
+#bundle{padding:100px 0;background:var(--bg-1)}
+.bundle-card{background:var(--bg-3);border:1px solid transparent;border-radius:24px;padding:60px;background-image:linear-gradient(var(--bg-3),var(--bg-3)),var(--grad-cool);background-origin:border-box;background-clip:padding-box,border-box;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.bundle-tag{display:inline-block;padding:6px 16px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:50px;font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;margin-bottom:20px}
+.bundle-items{list-style:none;display:flex;flex-direction:column;gap:12px;margin:24px 0 32px}
+.bundle-item{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--muted)}
+.bundle-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.bundle-pricing{display:flex;align-items:baseline;gap:16px}
+.bundle-orig{font-size:22px;color:var(--dim);text-decoration:line-through}
+.bundle-sale{font-family:Syne,sans-serif;font-size:52px;font-weight:800;background:var(--grad-cool);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bundle-save{padding:4px 12px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:50px;font-size:12px;font-weight:700;color:var(--gold)}
+.bundle-visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bv-item{background:rgba(108,99,255,.08);border:1px solid rgba(108,99,255,.15);border-radius:12px;padding:20px;text-align:center}
+.bv-icon{font-size:28px;margin-bottom:8px}
+.bv-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px}
+.bv-val{font-size:11px;color:var(--accent)}
+#faq{padding:100px 0;background:var(--bg-2)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.faq-item{background:var(--bg-4);border:1px solid var(--border);border-radius:16px;padding:28px;cursor:pointer;transition:all .3s var(--ease)}
+.faq-item:hover{border-color:rgba(108,99,255,.3)}
+.faq-item.open{border-color:rgba(108,99,255,.4);background:rgba(108,99,255,.04)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:16px;font-weight:600;color:#fff}
+.faq-icon{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;color:var(--accent);font-size:16px}
+.faq-item.open .faq-icon{transform:rotate(45deg);border-color:var(--accent);background:rgba(108,99,255,.1)}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s var(--ease),padding .3s;padding-top:0}
+.faq-item.open .faq-a{max-height:200px;padding-top:14px}
+#cta-bottom{padding:100px 0;background:var(--bg-1);text-align:center;position:relative;overflow:hidden}
+#cta-bottom::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(108,99,255,.2),transparent 60%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.cta-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+footer{background:var(--bg-2);border-top:1px solid var(--border);padding:60px 0 32px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:48px;margin-bottom:48px}
+.fb-brand p{font-size:14px;color:var(--muted);line-height:1.7;margin:14px 0 20px}
+.si{display:flex;gap:12px}
+.sico{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;color:var(--muted);transition:all .2s}
+.sico:hover{border-color:var(--accent);color:var(--accent);background:rgba(108,99,255,.1)}
+.fc h4{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fc ul a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
+.fc ul a:hover{color:#fff}
+.fc-cta{display:inline-block;margin-top:14px;padding:9px 18px;background:var(--grad);border-radius:6px;color:#fff;text-decoration:none;font-size:13px;font-weight:600;transition:all .3s}
+.fc-cta:hover{box-shadow:0 4px 16px rgba(108,99,255,.4)}
+.fb-bot{border-top:1px solid var(--border);padding-top:24px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--dim);flex-wrap:wrap;gap:12px}
+.fb-bot a{color:var(--dim);text-decoration:none;transition:color .2s}
+.fb-bot a:hover{color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(max-width:1024px){.products-grid{grid-template-columns:1fr 1fr}.feat-inner{grid-template-columns:1fr}.bundle-card{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}.faq-grid{grid-template-columns:1fr}}
+@media(max-width:768px){nav{padding:0 20px}.nav-links,.nav-cta{display:none}.hamburger{display:flex}.container{padding:0 20px}.products-grid{grid-template-columns:1fr}.bundle-visual-grid{grid-template-columns:1fr 1fr}.fg{grid-template-columns:1fr}.fb-bot{flex-direction:column;text-align:center}.cta-ctas{flex-direction:column;align-items:center}.feat-ctas{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+<div class="mobile-menu" id="mm">
+  <a href="index.html" data-nav>Home</a><a href="index.html#services" data-nav>Services</a>
+  <a href="index.html#portfolio" data-nav>Work</a><a href="index.html#about" data-nav>About</a>
+  <a href="products.html">Products</a><a href="index.html#contact" data-nav>Contact</a>
+</div>
+<nav id="nav">
+  <a href="index.html" class="nav-logo" data-nav>
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#6c63ff" stroke-width="2" fill="rgba(108,99,255,0.1)"/><polygon points="14,7 21,11 21,17 14,21 7,17 7,11" fill="#6c63ff" opacity="0.4"/></svg>
+    <span class="logo-text">ELITE STUDIO <span>AGENCY</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-nav>Home</a></li>
+    <li><a href="index.html#services" data-nav>Services</a></li>
+    <li><a href="index.html#portfolio" data-nav>Work</a></li>
+    <li><a href="index.html#about" data-nav>About</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="index.html#contact" data-nav>Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta" data-nav>Let's Talk</a>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<section id="products-hero">
+  <div class="hero-blob hb1"></div>
+  <div class="ph-inner">
+    <div class="ph-badge" data-reveal>&#128717; Digital Products Store</div>
+    <h1 class="ph-title" data-reveal>Tools That <span class="grad-text">Grow</span><br>Your Business</h1>
+    <p class="ph-sub" data-reveal>Professional templates, SEO guides, and digital tools built specifically for Scarborough and Toronto businesses.</p>
+    <div class="ph-search" data-reveal>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Search products..." id="search-input"/>
+    </div>
+  </div>
+</section>
+
+<section class="products-section">
+  <div class="container">
+    <div class="filter-bar" data-reveal>
+      <button class="filt-btn active" data-cat="all">All Products</button>
+      <button class="filt-btn" data-cat="template">Website Templates</button>
+      <button class="filt-btn" data-cat="seo">SEO Guides</button>
+      <button class="filt-btn" data-cat="tool">Business Tools</button>
+      <button class="filt-btn" data-cat="free">Free Resources</button>
+    </div>
+    <div class="products-grid" id="products-grid">
+
+      <div class="prod-card" data-reveal data-cat="template">
+        <div class="prod-thumb">
+          <div class="prod-thumb-bg" style="background:linear-gradient(135deg,#6c63ff,#1e40af)"></div>
+          <div class="prod-badge-wrap"><span class="pbadge pbadge-hot">Hot</span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Website Template</div>
+          <div class="prod-name">Trades Pro Website Template</div>
+          <p class="prod-desc">Complete website template for plumbers, electricians, roofers and contractors. Mobile-first, SEO-ready.</p>
+          <div class="prod-meta"><div class="prod-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="prod-reviews">(24 reviews)</div></div>
+          <div class="prod-footer">
+            <div class="prod-price">9</div>
+            <a href="index.html#contact" class="prod-btn" data-nav>Get Template &#8594;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-reveal style="transition-delay:.1s" data-cat="seo">
+        <div class="prod-thumb">
+          <div class="prod-thumb-bg" style="background:linear-gradient(135deg,#059669,#0d9488)"></div>
+          <div class="prod-badge-wrap"><span class="pbadge pbadge-new">New</span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">SEO Guide</div>
+          <div class="prod-name">Scarborough Local SEO Playbook</div>
+          <p class="prod-desc">Step-by-step guide to dominating local search in Scarborough and Toronto. Includes GBP optimization checklist.</p>
+          <div class="prod-meta"><div class="prod-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="prod-reviews">(18 reviews)</div></div>
+          <div class="prod-footer">
+            <div class="prod-price">9</div>
+            <a href="index.html#contact" class="prod-btn" data-nav>Get Guide &#8594;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-reveal style="transition-delay:.2s" data-cat="template">
+        <div class="prod-thumb">
+          <div class="prod-thumb-bg" style="background:linear-gradient(135deg,#f59e0b,#ef4444)"></div>
+          <div class="prod-badge-wrap"><span class="pbadge pbadge-hot">Popular</span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Website Template</div>
+          <div class="prod-name">Restaurant &amp; Cafe Template</div>
+          <p class="prod-desc">Modern restaurant website with menu showcase, reservation form, and Google Maps integration built in.</p>
+          <div class="prod-meta"><div class="prod-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="prod-reviews">(31 reviews)</div></div>
+          <div class="prod-footer">
+            <div class="prod-price">9</div>
+            <a href="index.html#contact" class="prod-btn" data-nav>Get Template &#8594;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-reveal data-cat="tool">
+        <div class="prod-thumb">
+          <div class="prod-thumb-bg" style="background:linear-gradient(135deg,#0ea5e9,#6c63ff)"></div>
+          <div class="prod-badge-wrap"><span class="pbadge pbadge-new">New</span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Business Tool</div>
+          <div class="prod-name">Client Proposal Generator</div>
+          <p class="prod-desc">Professional proposal template for service businesses. Win more clients with polished, branded proposals.</p>
+          <div class="prod-meta"><div class="prod-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div><div class="prod-reviews">(9 reviews)</div></div>
+          <div class="prod-footer">
+            <div class="prod-price">9</div>
+            <a href="index.html#contact" class="prod-btn" data-nav>Get Tool &#8594;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-reveal style="transition-delay:.1s" data-cat="free">
+        <div class="prod-thumb">
+          <div class="prod-thumb-bg" style="background:linear-gradient(135deg,#28c840,#059669)"></div>
+          <div class="prod-badge-wrap"><span class="pbadge pbadge-free">Free</span></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Free Resource</div>
+          <div class="prod-name">Google Business Profile Checklist</div>
+          <p class="prod-desc">Complete 25-point checklist to optimize your Google Business Profile and rank higher in local search today.</p>
+          <div class="prod-meta"><div class="prod-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="prod-reviews">(67 downloads)</div></div>
+          <div class="prod-footer">
+            <div class="prod-price-free">FREE</div>
+            <a href="index.html#contact" class="prod-btn-out" data-nav>Download &#8595;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-reveal style="transition-delay:.2s" data-cat="template">
+        <div class="prod-thumb">
+          <div class="prod-thumb-bg" style="background:linear-gradient(135deg,#8b5cf6,#ec4899)"></div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-cat">Website Template</div>
+          <div class="prod-name">Health &amp; Wellness Template</div>
+          <p class="prod-desc">Clean, professional template for clinics, spas, and wellness businesses. Appointment booking ready.</p>
+          <div class="prod-meta"><div class="prod-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="prod-reviews">(15 reviews)</div></div>
+          <div class="prod-footer">
+            <div class="prod-price">9</div>
+            <a href="index.html#contact" class="prod-btn" data-nav>Get Template &#8594;</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="container">
+    <div class="feat-inner">
+      <div data-reveal>
+        <div class="feat-visual">
+          <div class="feat-visual-bg" style="background:linear-gradient(135deg,#6c63ff 0%,#0d9488 50%,#1e40af 100%)"></div>
+          <div class="feat-label">&#9733; Featured Product</div>
+        </div>
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">Most Popular</p>
+        <h2 class="sec-title">The Complete <span class="grad-text">Digital Starter</span> Kit</h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.75;margin-bottom:8px">Everything a Scarborough small business needs to establish a powerful digital presence from day one.</p>
+        <ul class="feat-steps">
+          <li class="feat-step"><div class="fs-num">1</div><div class="fs-text"><strong>Professional Website Template</strong> — Launch-ready, mobile-optimised design</div></li>
+          <li class="feat-step"><div class="fs-num">2</div><div class="fs-text"><strong>Local SEO Playbook</strong> — Rank on Google Maps and local search</div></li>
+          <li class="feat-step"><div class="fs-num">3</div><div class="fs-text"><strong>GBP Checklist</strong> — Optimise your Google Business Profile fast</div></li>
+          <li class="feat-step"><div class="fs-num">4</div><div class="fs-text"><strong>30-min Strategy Call</strong> — Personal consultation with our team</div></li>
+        </ul>
+        <div class="feat-price">7</div>
+        <div class="feat-sub-price">One-time payment &mdash; instant access</div>
+        <div class="feat-ctas">
+          <a href="index.html#contact" class="btn-p" data-nav>Get the Kit &#8594;</a>
+          <a href="index.html#contact" class="btn-g" data-nav>Book a Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bundle">
+  <div class="container">
+    <div class="bundle-card" data-reveal>
+      <div>
+        <div class="bundle-tag">&#9889; Limited Time Bundle</div>
+        <h2 class="sec-title" style="letter-spacing:-2px">Agency <span class="grad-text">Bundle Deal</span></h2>
+        <p style="color:var(--muted);font-size:16px;line-height:1.7;margin-bottom:8px">Get all 6 products for one unbeatable price. The complete toolkit for local business growth.</p>
+        <ul class="bundle-items">
+          <li class="bundle-item">Trades Pro Website Template (9)</li>
+          <li class="bundle-item">Restaurant &amp; Cafe Template (9)</li>
+          <li class="bundle-item">Health &amp; Wellness Template (9)</li>
+          <li class="bundle-item">Scarborough Local SEO Playbook (9)</li>
+          <li class="bundle-item">Client Proposal Generator (9)</li>
+          <li class="bundle-item">GBP Checklist (Free)</li>
+        </ul>
+        <div class="bundle-pricing">
+          <div class="bundle-orig">95</div>
+          <div class="bundle-sale">9</div>
+          <div class="bundle-save">Save 49%</div>
+        </div>
+        <div style="margin-top:28px"><a href="index.html#contact" class="btn-p" data-nav>Get Bundle Deal &#8594;</a></div>
+      </div>
+      <div class="bundle-visual-grid">
+        <div class="bv-item"><div class="bv-icon">&#128187;</div><div class="bv-name">3 Templates</div><div class="bv-val">47 value</div></div>
+        <div class="bv-item"><div class="bv-icon">&#128270;</div><div class="bv-name">SEO Playbook</div><div class="bv-val">9 value</div></div>
+        <div class="bv-item"><div class="bv-icon">&#128196;</div><div class="bv-name">Proposal Tool</div><div class="bv-val">9 value</div></div>
+        <div class="bv-item"><div class="bv-icon">&#128204;</div><div class="bv-name">GBP Checklist</div><div class="bv-val">Free bonus</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Questions &amp; Answers</p>
+    <h2 class="sec-title" data-reveal>Frequently Asked <span class="grad-text">Questions</span></h2>
+    <div class="faq-grid">
+      <div class="faq-item" data-reveal>
+        <div class="faq-q">How are products delivered? <span class="faq-icon">+</span></div>
+        <div class="faq-a">All digital products are delivered instantly via email after purchase. You'll receive a download link within minutes of completing your order.</div>
+      </div>
+      <div class="faq-item" data-reveal style="transition-delay:.05s">
+        <div class="faq-q">Are templates easy to customise? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes! All templates are built with clean, well-commented HTML/CSS and include a setup guide. No coding experience required for basic customisation.</div>
+      </div>
+      <div class="faq-item" data-reveal style="transition-delay:.1s">
+        <div class="faq-q">Do you offer installation support? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Absolutely. We offer optional setup services for all templates. Contact us at hello@elitestudioagency.ca for a custom installation quote.</div>
+      </div>
+      <div class="faq-item" data-reveal style="transition-delay:.15s">
+        <div class="faq-q">Is there a refund policy? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Due to the digital nature of our products, all sales are final. However, if you experience any issues we will work with you to resolve them promptly.</div>
+      </div>
+      <div class="faq-item" data-reveal style="transition-delay:.2s">
+        <div class="faq-q">Can I use templates for client projects? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Single-purchase licenses cover one website. For agency or multi-use licenses, please contact us for pricing on extended licenses.</div>
+      </div>
+      <div class="faq-item" data-reveal style="transition-delay:.25s">
+        <div class="faq-q">Do guides work for businesses outside Scarborough? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Absolutely. While our guides reference local Toronto/Scarborough examples, the strategies apply to any local business in any Canadian or North American city.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta-bottom">
+  <div class="container">
+    <div class="cta-inner">
+      <p class="eyebrow" data-reveal>Still Have Questions?</p>
+      <h2 class="sec-title" data-reveal>Need a <span class="grad-text">Custom Solution?</span></h2>
+      <p style="color:var(--muted);font-size:17px;line-height:1.75" data-reveal>Don't see exactly what you need? We build fully custom websites and digital strategies for businesses across Scarborough and Toronto.</p>
+      <div class="cta-ctas" data-reveal>
+        <a href="index.html#contact" class="btn-p" data-nav>Get a Custom Quote &#8594;</a>
+        <a href="mailto:hello@elitestudioagency.ca" class="btn-g">&#9993; hello@elitestudioagency.ca</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="fg">
+      <div class="fb-brand">
+        <a href="index.html" class="nav-logo" data-nav style="display:inline-flex;margin-bottom:10px"><svg width="22" height="22" viewBox="0 0 28 28" fill="none"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" stroke="#6c63ff" stroke-width="2" fill="rgba(108,99,255,0.1)"/></svg><span class="logo-text" style="font-size:.95rem">ELITE STUDIO <span>AGENCY</span></span></a>
+        <p>Building digital excellence for Scarborough businesses and beyond.</p>
+        <div class="si"><a href="#" class="sico">X</a><a href="#" class="sico">in</a><a href="#" class="sico">ig</a><a href="#" class="sico">fb</a></div>
+      </div>
+      <div class="fc"><h4>Products</h4><ul><li><a href="#">Website Templates</a></li><li><a href="#">SEO Guides</a></li><li><a href="#">Business Tools</a></li><li><a href="#">Free Resources</a></li></ul></div>
+      <div class="fc"><h4>Company</h4><ul><li><a href="index.html" data-nav>About Us</a></li><li><a href="index.html#portfolio" data-nav>Portfolio</a></li><li><a href="index.html#testimonials" data-nav>Testimonials</a></li><li><a href="index.html#contact" data-nav>Contact</a></li></ul></div>
+      <div class="fc"><h4>Contact</h4><ul><li><a href="#">&#128205; Scarborough, Toronto</a></li><li><a href="mailto:hello@elitestudioagency.ca">&#9993; hello@elitestudioagency.ca</a></li></ul><a href="index.html#contact" class="fc-cta" data-nav>Get a Free Quote</a></div>
+    </div>
+    <div class="fb-bot"><span>&copy; 2026 Elite Studio Agency. All rights reserved.</span><div style="display:flex;gap:22px"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div></div>
+  </div>
+</footer>
+
+<script>
+const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
+let rx=0,ry=0;
+function raf(fn){requestAnimationFrame(fn)}
+document.addEventListener('mousemove',e=>{
+  dot.style.transform=`translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`;
+  rx+=(e.clientX-rx)*.12;ry+=(e.clientY-ry)*.12;
+  ring.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`});
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>ring.classList.add('hover'));el.addEventListener('mouseleave',()=>ring.classList.remove('hover'))});
+const ham=document.getElementById('ham'),mm=document.getElementById('mm');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mm.classList.toggle('open')});
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{ham.classList.remove('open');mm.classList.remove('open')}));
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('[data-reveal]').forEach(el=>ro.observe(el));
+document.querySelectorAll('.filt-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.filt-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const cat=btn.dataset.cat;document.querySelectorAll('.prod-card').forEach(c=>{const show=cat==='all'||c.dataset.cat===cat;c.style.opacity=show?'1':'.15';c.style.transform=show?'':'scale(.96)'})})});
+const si=document.getElementById('search-input');if(si)si.addEventListener('input',()=>{const q=si.value.toLowerCase();document.querySelectorAll('.prod-card').forEach(c=>{const name=c.querySelector('.prod-name').textContent.toLowerCase();const desc=c.querySelector('.prod-desc').textContent.toLowerCase();const show=!q||name.includes(q)||desc.includes(q);c.style.opacity=show?'1':'.15';c.style.transform=show?'':'scale(.96)'})});
+document.querySelectorAll('.faq-item').forEach(item=>{item.addEventListener('click',()=>{const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open')})});
+function nav2(url){const o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:#050507;z-index:99999;transform:translateY(-100%);transition:transform .35s cubic-bezier(.23,1,.32,1)';document.body.appendChild(o);raf(()=>raf(()=>{o.style.transform='translateY(0)'}));setTimeout(()=>location.href=url,380)}
+document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();nav2(a.href)}));
+</script>
+</body>
+</html>
