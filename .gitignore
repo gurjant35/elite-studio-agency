@@ -1,0 +1,35 @@
+# Secrets and local environment
+.env
+*.env
+**/.env
+*.pem
+*.key
+*service-account*.json
+google-sheets-service-account.json
+
+# Hermes backup snapshots may contain profile .env files and auth material.
+backups/
+
+# Local agent/Codex runtime metadata
+.agents/
+.codex/
+
+# Python/runtime noise
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

@@ -1,0 +1,41 @@
+model:
+  default: google/gemini-2.5-flash
+  provider: openrouter
+
+toolsets:
+  - hermes-cli
+
+timezone: America/Toronto
+
+messaging:
+  telegram:
+    poll_timeout: 30
+
+telegram:
+  allowed_chats: ""
+
+approvals:
+  mode: manual
+  cron_mode: manual
+
+web:
+  backend: ""
+  search_backend: ""
+  extract_backend: ""
+
+agent:
+  max_turns: 20
+  gateway_timeout: 300
+  gateway_timeout_warning: 180
+  clarify_timeout: 120
+
+file_read_max_chars: 100000
+
+tool_output:
+  max_bytes: 50000
+  max_lines: 2000
+  max_line_length: 2000
+
+onboarding:
+  seen:
+    tool_progress_prompt: true
